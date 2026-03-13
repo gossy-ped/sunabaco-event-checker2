@@ -1,1 +1,28 @@
+name: Check Sunabaco Events
 
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+  workflow_dispatch:
+
+jobs:
+  run-script:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: install python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: install packages
+      run: pip install requests
+
+    - name: run script
+      run: python event_checker.py
